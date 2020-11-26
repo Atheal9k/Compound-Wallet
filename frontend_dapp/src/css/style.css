@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: #F9FAFB;
+    color: #333;
+    line-height: 1.5;
+}
+
+
+
+ul {
+    list-style: none;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+.rootSectionMenu {
+    display:flex;
+    flex-direction: row;
+    flex: 1 1 0%;
+    overflow:hidden;
+}
+
+.sectionMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;    
+    max-width: 220px;
+    height: 100vh;
+    position: relative;
+    background-color: #070A0E;
+    padding-left: 10px;
+    padding-top: 25px; 
+    text-align:center;
+    border-right:  #27D395 solid 5px;
+    
+    
+}
+
+.mainContent .innerMainContent .dai-logo {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 25%;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    
+    
+}
+
+.mainContent .innerMainContent .inputToBlockChain {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 25%;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    
+}
+
+.sectionMenu .menu {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+}
+
+
+
+.sectionMenu .link-item {
+    align-self: flex-start;
+    width: 100%;
+    opacity:0.97;
+
+}
+
+.sectionMenu a {
+    color: #fff;
+}
+
+.sectionMenu a:hover{
+    color: #27D395;
+    background-color: #fff;
+    
+    
+}
+
+.sectionMenu .btn-title {
+    
+    width: 100%;
+    
+}
+
+
+.sectionMenu i {
+    display: inline;
+    color: #27D395;
+    padding-right: 10px;
+    
+}
+
+
+
+.sectionMenu p {
+    
+    font-size: 0.8rem;
+    padding-bottom: 10px;
+    margin: 12px;
+    text-align:left;
+    font-size: 1.01rem;
+}
+
+.footer {
+    align-self: flex-start;
+    color: #fff;
+} 
+
+.footer a {
+    
+    color: #27D395;
+
+}
+
+.footer a:hover {
+    background-color: black;
+    opacity: 0.9;
+    color: #27D395;
+}
+
+.footer .social {
+    border:none;
+    margin-right: 1.4rem;
+}
+
+.footer p {
+    font-size: 0.7rem;
+    text-align: left;
+}
+
+
+ .mainContent {
+    display:flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    flex: 2 1  0%;
+     
+} 
+
+.innerMainContent {
+    display:flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+}
+
+.form-submit {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-submit .input-send {
+    height: 40px;
+    border: #f5f5f5 1px solid;
+    text-align: center;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.form-submit .input-send:focus {
+    outline-color: #27D395;
+}
+
+.form-submit .btn-send {
+    height: 40px;
+    width: 30%;
+    border: none;
+    color: #fff;
+    background-color:  #27D395;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.form-submit .btn-send:hover {
+    opacity: 0.9;
+}
+
+
+
