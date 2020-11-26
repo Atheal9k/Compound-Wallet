@@ -1,8 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
+import compound from './compound';
+import SendValueToBlockchain from './SendValueToBlockchain';
 
-const RedeemTokensPage = () => {
+const RedeemTokensPage = ({deposit}) => {
     return (
-        <div>gg</div>
+        <div className="mainContent">
+            <div className="innerMainContent">
+            <img className="page-logos" src="/images/cDai-logo.png" alt="cDai-logo" />
+            <SendValueToBlockchain deposits={deposit}/>
+            </div>
+        </div>
     )
 }
 

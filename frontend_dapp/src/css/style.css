@@ -50,7 +50,7 @@ a {
     
 }
 
-.mainContent .innerMainContent .dai-logo {
+.mainContent .innerMainContent .page-logos {
     display: flex;
     flex-direction: column;
     align-self: center;

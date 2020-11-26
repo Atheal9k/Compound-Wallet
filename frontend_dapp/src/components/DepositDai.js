@@ -10,7 +10,7 @@ const DepositDai = ({deposit}) => {
     return (
         <div className="mainContent">
             <div className="innerMainContent">
-            <img className="dai-logo" src="/images/dai-logo.png" alt="dai-logo" />
+            <img className="page-logos" src="/images/dai-logo.png" alt="dai-logo" />
             <SendValueToBlockchain deposits={deposit}/>
             </div>
         </div>

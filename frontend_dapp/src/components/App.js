@@ -7,7 +7,8 @@ import Compound from './compound';
 import Route from './Route';
 import DepositDai from './DepositDai';
 import DaiBalancePage from './DaiBalancePage';
-
+import SupplyToCompoundPage from './SupplyToCompoundPage';
+import RedeemTokensPage from './RedeemTokensPage';
 
 
 
@@ -149,11 +150,6 @@ const App = () => {
     
   }
 
-  const sendToYFI = async () => {
-    let supplyResult = await contract.methods.save(web3.utils.toHex(10 * Math.pow(10, 18))).send(fromMyWallet)
-    
-
-  }
 
   const redeemCDAITokens = async () => {
     
@@ -186,7 +182,9 @@ const App = () => {
     <div className="rootSectionMenu">
       <Compound web3={web3} contract={contract} daiContract={daiContract} compoundCDaiContract={compoundCDaiContract} fromMyWallet={fromMyWallet}> </Compound>
       <Route path="/deposit"><DepositDai deposit={sendDaiToWallet}/></Route>
-      
+      <Route path="/dai-balance"><DaiBalancePage checkBalance={checkDaiBalance}/></Route>
+      <Route path="/send-to-compound"><SupplyToCompoundPage deposit={supplyToCompound}/></Route>
+      <Route path="/redeem-cdai"><RedeemTokensPage deposit={redeemCDAITokens}/></Route>
       
       
     </div>

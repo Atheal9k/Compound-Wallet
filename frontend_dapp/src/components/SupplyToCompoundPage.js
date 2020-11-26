@@ -1,8 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
+import compound from './compound';
+import SendValueToBlockchain from './SendValueToBlockchain';
 
-const SupplyToCompoundPage = () => {
+const SupplyToCompoundPage = ({deposit}) => {
+
+
     return (
-        <div>gg</div>
+        <div className="mainContent">
+            <div className="innerMainContent">
+            <img className="page-logos" src="/images/compound-logo.png" alt="compound-logo" />
+            <SendValueToBlockchain deposits={deposit}/>
+            </div>
+        </div>
     )
 }
 

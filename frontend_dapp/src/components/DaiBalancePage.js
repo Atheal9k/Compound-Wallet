@@ -1,8 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-const DaiBalancePage = () => {
+
+const DaiBalancePage = ({checkBalance}) => {
+    const [balance, setBalance] = useState(0);
+
+
+
     return (
-        <div>ggssssssssss</div>
+        <div>
+            <button>check</button>
+        </div>
     )
 }
 
