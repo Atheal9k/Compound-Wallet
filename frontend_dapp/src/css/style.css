@@ -57,11 +57,29 @@ a {
     width: 25%;
     margin-top: 5rem;
     margin-bottom: 3rem;
-    
-    
+  
 }
 
-.mainContent .innerMainContent .inputToBlockChain {
+.mainContent .innerMainContent .balanceLabel {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-top: 13rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  
+}
+
+.mainContent .innerMainContent .balances {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-bottom: 3rem;
+    font-size: 4rem;
+}
+
+
+/* .mainContent .innerMainContent .inputToBlockChain {
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -69,7 +87,7 @@ a {
     margin-top: 5rem;
     margin-bottom: 3rem;
     
-}
+} */
 
 .sectionMenu .menu {
     display:flex;
@@ -167,12 +185,16 @@ a {
     flex: 1 1 0%;
 }
 
+
+
 .form-submit {
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+
 
 .form-submit .input-send {
     height: 40px;
@@ -200,6 +222,31 @@ a {
 .form-submit .btn-send:hover {
     opacity: 0.9;
 }
+
+.refresh-btn {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.refresh-btn .btn-refresh {
+    
+    height: 40px;
+    width: 30%;
+    border: none;
+    color: #fff;
+    background-color:  #27D395;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.refresh-btn .btn-refresh:hover {
+    opacity: 0.9;
+}
+
+
 
 
 

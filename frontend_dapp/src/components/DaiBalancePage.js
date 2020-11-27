@@ -1,14 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import CheckBalanceButton from './CheckBalanceButton';
 
 
-const DaiBalancePage = ({checkBalance}) => {
-    const [balance, setBalance] = useState(0);
+const DaiBalancePage = ({checkBalance, daiBalance}) => {
 
+    const showBalance = async () => {
+        const balances = checkBalance().then(result => {
+            console.log("success")
+            
+        }).catch(err => {
+            console.log('failed')
+        })
+    }
 
 
     return (
-        <div>
-            <button>check</button>
+        <div className="mainContent">
+            <div className="innerMainContent">
+            <label className="balanceLabel">Total Dai:</label>
+            <div className="balances">{daiBalance}</div>
+            <CheckBalanceButton showBalances={showBalance}/>
+            </div>
         </div>
     )
 }
