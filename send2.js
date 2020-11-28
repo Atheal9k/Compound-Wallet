@@ -16,7 +16,7 @@ const web3 = new Web3('http://127.0.0.1:8545');
 
 // Set up a wallet using one of Ganache's key pairs.
 // Don't use this key outside of your local test environment.
-const privateKey = '0x48391bb10d43918722364579975df20109b0f30d94c270fc4438d32a60f6cd0f';
+const privateKey = '0x43448b8a048ef0cbce5264849f1d482c586d558a3452816e07de578de432f128';
 
 // Add your Ethereum wallet to the Web3 object
 web3.eth.accounts.wallet.add(privateKey);
@@ -24,7 +24,7 @@ const myWalletAddress = web3.eth.accounts.wallet[0].address;
 
 // `myContractAddress` is logged when running the deploy script in the root
 // directory of the project. Run the deploy script prior to running this one.
-const myContractAddress = '0x716cfE14c820b7052B333aB66D56807cFbBb5a81';
+const myContractAddress = '0x9647F976304EeA0C76869C1c6C6C47bFC6F790eb';
 const myAbi = require('./Walletabi.js');
 const myContract = new web3.eth.Contract(myAbi, myContractAddress);
 
@@ -80,30 +80,49 @@ const main = async function() {
   console.log(`MyContract's c${assetName} Token Balance:`, cTokenBalance);
 
   // Call redeem based on a cToken amount
-//   const amount = web3.utils.toHex(cTokenBalance * 1e8);
-//   const redeemType = true; // true for `redeem`
+  // const amount = web3.utils.toHex(cTokenBalance * 1e8);
+  // const redeemType = true; // true for `redeem`
 
-//   // Call redeemUnderlying based on an underlying amount
-//   // const amount = web3.utils.toHex(balanceOfUnderlying);
-//   // const redeemType = false; //false for `redeemUnderlying`
+  // // Call redeemUnderlying based on an underlying amount
+  // // const amount = web3.utils.toHex(balanceOfUnderlying);
+  // // const redeemType = false; //false for `redeemUnderlying`
 
-//   // Retrieve your asset by exchanging cTokens
-//   console.log(`Redeeming the c${assetName} for ${assetName}...`);
-//   let redeemResult = await myContract.methods.redeemCErc20Tokens(
-//     amount,
-//     redeemType,
-//     cTokenAddress
-//   ).send(fromMyWallet);
+  // // Retrieve your asset by exchanging cTokens
+  // console.log(`Redeeming the c${assetName} for ${assetName}...`);
+  // let redeemResult = await myContract.methods.redeemCDai(
+  //   amount,
+  //   redeemType,
+  //   cTokenAddress
+  // ).send(fromMyWallet);
 
-//   if (redeemResult.events.MyLog.returnValues[1] != 0) {
-//     throw Error('Redeem Error Code: '+redeemResult.events.MyLog.returnValues[1]);
-//   }
+  // // if (redeemResult.events.MyLog.returnValues[1] != 0) {
+  // //   throw Error('Redeem Error Code: '+redeemResult.events.MyLog.returnValues[1]);
+  // // }
 
-//   cTokenBalance = await cToken.methods.balanceOf(myContractAddress).call();
-//   cTokenBalance = cTokenBalance / 1e8;
-//   console.log(`MyContract's c${assetName} Token Balance:`, cTokenBalance);
+  // cTokenBalance = await cToken.methods.balanceOf(myContractAddress).call();
+  // cTokenBalance = cTokenBalance / 1e8;
+  // console.log(`MyContract's c${assetName} Token Balance:`, cTokenBalance);
 }
 
-main().catch((err) => {
+const kek = async () => {
+  let transferResult = await underlying.methods.balanceOf(myContractAddress).call()
+  const daiForReading = web3.utils.fromWei(transferResult)
+  console.log(daiForReading);
+
+  console.log(`MyContract is now minting c${assetName}...`);
+    let supplyResult = await myContract.methods.supplyDAIToCompound(underlyingMainnetAddress, cTokenAddress, web3.utils.toHex(10 * Math.pow(10, 18))).send(fromMyWallet)
+    console.log(`Supplied  ${assetName} to Compound via MyContract`);
+   
+
+  let cTokenBalance = await cToken.methods.balanceOf(myContractAddress).call();
+  cTokenBalance = cTokenBalance / 1e8;
+  console.log(`MyContract's c${assetName} Token Balance:`, cTokenBalance);
+}
+
+// main().catch((err) => {
+//   console.error(err);
+// });
+
+kek().catch((err) => {
   console.error(err);
 });

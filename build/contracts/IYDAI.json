@@ -69,9 +69,9 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5.0;\r\nimport '@openzeppelin/contracts/token/ERC20/IERC20.sol';\r\nimport './IUniswapV2Router02.sol';\r\n\r\ninterface IYDAI {\r\n    function deposit (uint _amount) external;\r\n    function withdraw(uint _shares) external;\r\n    function balanceOf(address account) external view returns (uint);\r\n    function getPricePerFullShare() external view returns (uint);\r\n}\r\n\r\ninterface CERC20 {\r\n    function mint(uint256) external returns (uint256);\r\n    function exchangeRateCurrent() external returns(uint256);\r\n    function supplyRatePerBlock() external returns(uint256);\r\n    function redeem(uint) external returns(uint);\r\n    function redeemUnderlying(uint) external returns(uint);\r\n}\r\n\r\n\r\n\r\n// interface LendingPoolAddressesProvider {\r\n//     function deposit( address _reserve, uint256 _amount, uint16 _referralCode) external;\r\n//     function getLendingPool() external view returns (address) ;\r\n//     function getLendingPoolCore() external view returns (address payable) ;\r\n// }\r\n\r\n// interface LendingPool{\r\n//     function deposit( address _reserve, uint256 _amount, uint16 _referralCode) external;\r\n// }\r\n\r\ncontract Wallets {\r\n    address admin;\r\n    IERC20 dai = IERC20(0x6B175474E89094C44Da98b954EedeAC495271d0F);\r\n    IYDAI yDai = IYDAI(0xC2cB1040220768554cf699b0d863A3cd4324ce32);\r\n    CERC20 cDai = CERC20(0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643);\r\n    uint public num1;\r\n\r\n    IUniswapV2Router02 uniswap;\r\n    \r\n\r\n    // Retrieve LendingPool address\r\n    // LendingPoolAddressesProvider provider;  // mainnet address, for other addresses: https://docs.aave.com/developers/developing-on-aave/deployed-contract-instances\r\n    // LendingPool lendingPool;\r\n\r\n    // address ETHER = address(0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE);\r\n    // uint256 amount = 10 * 1e18;\r\n    // uint16 referral = 0;\r\n\r\n    constructor() public {\r\n       // address uniswapAddress, address daiAddress\r\n        admin = msg.sender;\r\n        //uniswap = IUniswapV2Router02(uniswapAddress);\r\n        //dai = IERC20(0x6B175474E89094C44Da98b954EedeAC495271d0F);\r\n        //cDai = CERC20(0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643);\r\n    }\r\n\r\n    function save(uint amount) external payable {\r\n        dai.transferFrom(msg.sender, address(this), amount);\r\n        _save(amount);\r\n        \r\n    }\r\n\r\n    function spend(uint amount, address recipient) external {\r\n        require(msg.sender == admin, 'only admin');\r\n        uint balanceShares = yDai.balanceOf(address(this));\r\n        yDai.withdraw(balanceShares);\r\n        dai.transfer(recipient, amount);\r\n        uint balanceDai = dai.balanceOf(address(this));\r\n        if(balanceDai>0){\r\n            _save(balanceDai);\r\n        }\r\n    }\r\n\r\n    function _save(uint amount) internal {\r\n        dai.approve(address(yDai), amount);\r\n        yDai.deposit(amount);\r\n    }\r\n\r\n    function balance() external view returns(uint) {\r\n        uint price = yDai.getPricePerFullShare();\r\n        uint balanceShares = yDai.balanceOf(address(this));\r\n        return balanceShares * price;\r\n    }\r\n\r\n    function setTest(uint num) public{\r\n        num1 = num;\r\n    }\r\n\r\n    function getTest() public view returns(uint){\r\n        return num1;\r\n    }\r\n\r\n    function supplyDAIToCompound(address dai, address cDai, uint256 _numTokensToSupply) public returns (uint){\r\n        IERC20 underlying = IERC20(dai);\r\n        CERC20 cToken = CERC20(cDai);\r\n        \r\n         uint256 exchangeRateMantissa = cToken.exchangeRateCurrent();\r\n        // emit MyLog(\"Exchange Rate (scaled up): \", exchangeRateMantissa);\r\n\r\n         uint256 supplyRateMantissa = cToken.supplyRatePerBlock();\r\n        // emit MyLog(\"Supply Rate: (scaled up)\", supplyRateMantissa);\r\n\r\n        \r\n\r\n        underlying.approve(address(cDai), _numTokensToSupply);\r\n\r\n        uint mintResult = cToken.mint(_numTokensToSupply);\r\n        return mintResult;\r\n    }\r\n\r\n    function redeemCDai(uint256 amount, bool redeemType, address cDai) public returns (bool) {\r\n        CERC20 cToken = CERC20(cDai);\r\n\r\n        uint256 redeemResult;\r\n\r\n        if(redeemType == true) {\r\n            redeemResult = cToken.redeem(amount);\r\n        }\r\n        else {\r\n            redeemResult = cToken.redeemUnderlying(amount);\r\n        }\r\n\r\n        return true;\r\n    }\r\n\r\n    function() external payable {}\r\n\r\n    \r\n\r\n}",
-  "sourcePath": "D:/Users/victo/Desktop/Crypto Programming/DeFi/Yearn wallet - Copy/contracts/Wallets.sol",
+  "sourcePath": "D:/Users/victo/Desktop/Crypto Programming/DeFi/Compound wallet/contracts/Wallets.sol",
   "ast": {
-    "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Yearn wallet - Copy/contracts/Wallets.sol",
+    "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Compound wallet/contracts/Wallets.sol",
     "exportedSymbols": {
       "CERC20": [
         487
@@ -109,7 +109,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Yearn wallet - Copy/contracts/IUniswapV2Router02.sol",
+        "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Compound wallet/contracts/IUniswapV2Router02.sol",
         "file": "./IUniswapV2Router02.sol",
         "id": 432,
         "nodeType": "ImportDirective",
@@ -4307,7 +4307,7 @@
     "src": "0:4287:3"
   },
   "legacyAST": {
-    "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Yearn wallet - Copy/contracts/Wallets.sol",
+    "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Compound wallet/contracts/Wallets.sol",
     "exportedSymbols": {
       "CERC20": [
         487
@@ -4345,7 +4345,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Yearn wallet - Copy/contracts/IUniswapV2Router02.sol",
+        "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Compound wallet/contracts/IUniswapV2Router02.sol",
         "file": "./IUniswapV2Router02.sol",
         "id": 432,
         "nodeType": "ImportDirective",
@@ -8548,7 +8548,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-11-24T22:51:13.220Z",
+  "updatedAt": "2020-11-27T00:36:45.708Z",
   "devdoc": {
     "methods": {}
   },

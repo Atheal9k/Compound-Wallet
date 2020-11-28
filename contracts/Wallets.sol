@@ -37,7 +37,7 @@ contract Wallets {
     uint public num1;
 
     IUniswapV2Router02 uniswap;
-    
+    event MyLog(string s, uint256 _value);
 
     // Retrieve LendingPool address
     // LendingPoolAddressesProvider provider;  // mainnet address, for other addresses: https://docs.aave.com/developers/developing-on-aave/deployed-contract-instances
@@ -96,10 +96,10 @@ contract Wallets {
         CERC20 cToken = CERC20(cDai);
         
          uint256 exchangeRateMantissa = cToken.exchangeRateCurrent();
-        // emit MyLog("Exchange Rate (scaled up): ", exchangeRateMantissa);
+         emit MyLog("Exchange Rate (scaled up): ", exchangeRateMantissa);
 
          uint256 supplyRateMantissa = cToken.supplyRatePerBlock();
-        // emit MyLog("Supply Rate: (scaled up)", supplyRateMantissa);
+         emit MyLog("Supply Rate: (scaled up)", supplyRateMantissa);
 
         
 

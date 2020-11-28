@@ -20,6 +20,11 @@ module.exports = [
     "type": "constructor"
   },
   {
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -114,6 +119,33 @@ module.exports = [
       {
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "redeemType",
+        "type": "bool"
+      },
+      {
+        "name": "cDai",
+        "type": "address"
+      }
+    ],
+    "name": "redeemCDai",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
       }
     ],
     "payable": false,

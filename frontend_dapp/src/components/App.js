@@ -24,11 +24,11 @@ const App = () => {
   const [fromMyWallet, setFromMyWallet] = useState(undefined)
 
   const assetName = 'DAI';
-  const contractAddress = "0x626acb7D3feB20c0a57e9ef88aEE1c9C3aF03578"
+  const contractAddress = "0x9647F976304EeA0C76869C1c6C6C47bFC6F790eb"
   const daiMainNetAddress = '0x6b175474e89094c44da98b954eedeac495271d0f';
   const compoundCDaiContractAddress = '0x5d3a536e4d6dbd6114cc1ead35777bab948e3643';
 
-  const privateKey = '0x5ce114904752af65e648467d9e9a25e8c00cd73185a5bf217cf38e5a7754bdfa';
+  const privateKey = '0x43448b8a048ef0cbce5264849f1d482c586d558a3452816e07de578de432f128';
 
   
  
@@ -121,13 +121,13 @@ const App = () => {
     console.log(`MyContract now has ${assetName} to supply to the Compound Protocol.`);
   }
 
-  const supplyToCompound = async (amount) => {
+  const supplyToCompound = async () => {
     console.log(`MyContract is now minting c${assetName}...`);
-    let aaa = await daiContract.methods.approve(compoundCDaiContractAddress, web3.utils.toHex(amount * Math.pow(10, 18)));
     let supplyResult = await contract.methods.supplyDAIToCompound(daiMainNetAddress, compoundCDaiContractAddress, web3.utils.toHex(10 * Math.pow(10, 18))).send(fromMyWallet)
     console.log(`Supplied ${assetName} to Compound via MyContract`);
     console.log(supplyResult)
-    console.log(supplyResult.events.MyLog)
+    console.log(supplyResult.events.MyLog);
+  
   }
 
   const balanceInCompound = async() => {
@@ -190,7 +190,8 @@ const App = () => {
       <Route path="/send-to-compound"><SupplyToCompoundPage deposit={supplyToCompound}/></Route>
       <Route path="/compound-balance"><BalanceInCompoundPage checkBalance={balanceInCompound} cDaiBalance={cDaiBalance}/></Route>
       <Route path="/redeem-cdai"><RedeemTokensPage deposit={redeemCDAITokens}/></Route>
-      
+      <button onClick={supplyToCompound}>gg</button>
+      <button onClick={balanceInCompound}>ff</button>
       
     </div>
     

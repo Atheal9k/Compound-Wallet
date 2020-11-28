@@ -859,9 +859,9 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5.0;\r\n\r\nimport './IUniswapV2Router01.sol';\r\n\r\ncontract IUniswapV2Router02 is IUniswapV2Router01 {\r\n    function removeLiquidityETHSupportingFeeOnTransferTokens(\r\n        address token,\r\n        uint liquidity,\r\n        uint amountTokenMin,\r\n        uint amountETHMin,\r\n        address to,\r\n        uint deadline\r\n    ) external returns (uint amountETH);\r\n    function removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(\r\n        address token,\r\n        uint liquidity,\r\n        uint amountTokenMin,\r\n        uint amountETHMin,\r\n        address to,\r\n        uint deadline,\r\n        bool approveMax, uint8 v, bytes32 r, bytes32 s\r\n    ) external returns (uint amountETH);\r\n\r\n    function swapExactTokensForTokensSupportingFeeOnTransferTokens(\r\n        uint amountIn,\r\n        uint amountOutMin,\r\n        address[] calldata path,\r\n        address to,\r\n        uint deadline\r\n    ) external;\r\n    function swapExactETHForTokensSupportingFeeOnTransferTokens(\r\n        uint amountOutMin,\r\n        address[] calldata path,\r\n        address to,\r\n        uint deadline\r\n    ) external payable;\r\n    function swapExactTokensForETHSupportingFeeOnTransferTokens(\r\n        uint amountIn,\r\n        uint amountOutMin,\r\n        address[] calldata path,\r\n        address to,\r\n        uint deadline\r\n    ) external;\r\n}",
-  "sourcePath": "D:\\Users\\victo\\Desktop\\Crypto Programming\\DeFi\\Yearn wallet - Copy\\contracts\\IUniswapV2Router02.sol",
+  "sourcePath": "D:\\Users\\victo\\Desktop\\Crypto Programming\\DeFi\\Compound wallet\\contracts\\IUniswapV2Router02.sol",
   "ast": {
-    "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Yearn wallet - Copy/contracts/IUniswapV2Router02.sol",
+    "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Compound wallet/contracts/IUniswapV2Router02.sol",
     "exportedSymbols": {
       "IUniswapV2Router02": [
         395
@@ -882,7 +882,7 @@
         "src": "0:23:1"
       },
       {
-        "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Yearn wallet - Copy/contracts/IUniswapV2Router01.sol",
+        "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Compound wallet/contracts/IUniswapV2Router01.sol",
         "file": "./IUniswapV2Router01.sol",
         "id": 310,
         "nodeType": "ImportDirective",
@@ -1949,7 +1949,7 @@
     "src": "0:1326:1"
   },
   "legacyAST": {
-    "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Yearn wallet - Copy/contracts/IUniswapV2Router02.sol",
+    "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Compound wallet/contracts/IUniswapV2Router02.sol",
     "exportedSymbols": {
       "IUniswapV2Router02": [
         395
@@ -1970,7 +1970,7 @@
         "src": "0:23:1"
       },
       {
-        "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Yearn wallet - Copy/contracts/IUniswapV2Router01.sol",
+        "absolutePath": "/D/Users/victo/Desktop/Crypto Programming/DeFi/Compound wallet/contracts/IUniswapV2Router01.sol",
         "file": "./IUniswapV2Router01.sol",
         "id": 310,
         "nodeType": "ImportDirective",
@@ -3042,7 +3042,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-11-24T22:51:13.189Z",
+  "updatedAt": "2020-11-27T00:36:45.676Z",
   "devdoc": {
     "methods": {}
   },
