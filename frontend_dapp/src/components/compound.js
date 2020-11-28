@@ -62,9 +62,9 @@ const Compound = () => {
                 <footer class="footer">
             <div class="social">
             <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/Atheal9k"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.youtube.com/channel/UCsIlKB0CTk89_6WwHv5eX7w"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.linkedin.com/in/victor-huang-80b933188/"><i class="fab fa-linkedin"></i></a>
         </div>
         <p>Copyright &copy; 2020 Compound Wallet</p>
     </footer>
