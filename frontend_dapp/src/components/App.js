@@ -24,11 +24,11 @@ const App = () => {
   const [fromMyWallet, setFromMyWallet] = useState(undefined)
 
   const assetName = 'DAI';
-  const contractAddress = "0x9647F976304EeA0C76869C1c6C6C47bFC6F790eb"
+  const contractAddress = "0x51b5bcd42ff887da2c97631C13424C4bde1dF515"
   const daiMainNetAddress = '0x6b175474e89094c44da98b954eedeac495271d0f';
   const compoundCDaiContractAddress = '0x5d3a536e4d6dbd6114cc1ead35777bab948e3643';
 
-  const privateKey = '0x43448b8a048ef0cbce5264849f1d482c586d558a3452816e07de578de432f128';
+  const privateKey = '0x8aa1a15d67c8a56c7b16acc2184784ef1dc82d481ecad77cdc67d81811f03310';
 
   
  
@@ -86,15 +86,15 @@ const App = () => {
 
   useEffect(() => {
     const load = async () => {
-      // Stores a given value, 5 by default.
+    
      // await contract.methods.save(10).send({ from: accounts[0] });
 
       
       //const balances = await contract.methods.balance().call();
      //   setBalance(balances)
     //  await contract.methods.setTest(7).send({ from: accounts[0] });
-    //  var kek = await contract.methods.getTest().call();
-    //  setNumber(kek);
+ 
+    
      
 
     };
@@ -117,13 +117,13 @@ const App = () => {
     console.log(`Now transferring ${assetName} from my wallet to MyContract...`);
 
     let transferResult = await daiContract.methods.transfer(contractAddress, web3.utils.toHex(amount * Math.pow(10, 18))).send(fromMyWallet)
-
+    
     console.log(`MyContract now has ${assetName} to supply to the Compound Protocol.`);
   }
 
-  const supplyToCompound = async () => {
+  const supplyToCompound = async (amount) => {
     console.log(`MyContract is now minting c${assetName}...`);
-    let supplyResult = await contract.methods.supplyDAIToCompound(daiMainNetAddress, compoundCDaiContractAddress, web3.utils.toHex(10 * Math.pow(10, 18))).send(fromMyWallet)
+    let supplyResult = await contract.methods.supplyDAIToCompound(daiMainNetAddress, compoundCDaiContractAddress, web3.utils.toHex(amount * Math.pow(10, 18))).send(fromMyWallet)
     console.log(`Supplied ${assetName} to Compound via MyContract`);
     console.log(supplyResult)
     console.log(supplyResult.events.MyLog);
@@ -155,23 +155,23 @@ const App = () => {
   }
 
 
-  const redeemCDAITokens = async () => {
+  const redeemCDAITokens = async (amount) => {
     
     // get balance back
-    var cDaiBalance = await compoundCDaiContract.methods.balanceOf(contractAddress).call();
-    cDaiBalance = cDaiBalance /1e8;
+    // var cDaiBalance = await compoundCDaiContract.methods.balanceOf(contractAddress).call();
+    // cDaiBalance = cDaiBalance /1e8;
 
-    const amount = web3.utils.toHex(cDaiBalance * 1e8);
+    const amountToRedeem = web3.utils.toHex(amount * 1e8);
     const redeemType = true;
     console.log(`Redeeming the c${assetName} for ${assetName}...`);
 
-    let redeemResult = await contract.methods.redeemCDai(amount, redeemType, compoundCDaiContractAddress).send(fromMyWallet);
+    let redeemResult = await contract.methods.redeemCDai(amountToRedeem, redeemType, compoundCDaiContractAddress).send(fromMyWallet);
 
     // if (redeemResult.events.MyLog.returnValues[1] != 0) {
     //   throw Error('Redeem Error Code: '+redeemResult.events.MyLog.returnValues[1]);
     // }
 
-    cDaiBalance = await compoundCDaiContract.methods.balanceOf(contractAddress).call();
+    var cDaiBalance = await compoundCDaiContract.methods.balanceOf(contractAddress).call();
     cDaiBalance = cDaiBalance / 1e8;
     console.log(`MyContract's c${assetName} Token Balance:`, cDaiBalance);
   }
@@ -184,14 +184,12 @@ const App = () => {
 
   return (
     <div className="rootSectionMenu">
-      <Compound web3={web3} contract={contract} daiContract={daiContract} compoundCDaiContract={compoundCDaiContract} fromMyWallet={fromMyWallet}> </Compound>
+      <Compound />
       <Route path="/deposit"><DepositDai deposit={sendDaiToWallet}/></Route>
       <Route path="/dai-balance"><DaiBalancePage checkBalance={checkDaiBalance} daiBalance={daiBalance}/></Route>
       <Route path="/send-to-compound"><SupplyToCompoundPage deposit={supplyToCompound}/></Route>
       <Route path="/compound-balance"><BalanceInCompoundPage checkBalance={balanceInCompound} cDaiBalance={cDaiBalance}/></Route>
       <Route path="/redeem-cdai"><RedeemTokensPage deposit={redeemCDAITokens}/></Route>
-      <button onClick={supplyToCompound}>gg</button>
-      <button onClick={balanceInCompound}>ff</button>
       
     </div>
     
