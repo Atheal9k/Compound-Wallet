@@ -184,7 +184,7 @@ const App = () => {
 
   return (
     <div className="rootSectionMenu">
-      <Compound />
+      <Compound/>
       <Route path="/deposit"><DepositDai deposit={sendDaiToWallet}/></Route>
       <Route path="/dai-balance"><DaiBalancePage checkBalance={checkDaiBalance} daiBalance={daiBalance}/></Route>
       <Route path="/send-to-compound"><SupplyToCompoundPage deposit={supplyToCompound}/></Route>
