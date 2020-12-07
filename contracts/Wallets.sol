@@ -1,6 +1,5 @@
-pragma solidity >=0.5.0;
+pragma solidity 0.6.12;
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import './IUniswapV2Router02.sol';
 import { FlashLoanReceiverBase } from "./flashloan/base/FlashLoanReceiverBase.sol";
 
 interface IYDAI {
@@ -25,7 +24,7 @@ interface LendingPoolAddressesProvider {
 interface LendingPool{
     function deposit(address asset, uint256 amount, address onBehalfOf, uint16 referralCode) external;
     function borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf) external;
-    function flashLoan(address receiverAddress, address[] calldata assets, uint256[] calldata amounts, uint256[] modes, address onBehalfOf, bytes calldata params, uint16 referralCode) external;
+    function flashLoan(address receiverAddress, address[] calldata assets, uint256[] calldata amounts, uint256[] calldata modes, address onBehalfOf, bytes calldata params, uint16 referralCode) external;
 }
 
 
@@ -38,8 +37,10 @@ contract Wallets is FlashLoanReceiverBase {
     LendingPoolAddressesProvider provider = LendingPoolAddressesProvider(0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5);
     LendingPool lendingPool;
     uint public flashLoanedAmount;
+    address _provider;
+    
 
-    IUniswapV2Router02 uniswap;
+    //IUniswapV2Router02 uniswap;
     event MyLog(string s, uint256 _value);
 
     // Retrieve LendingPool address
@@ -50,11 +51,11 @@ contract Wallets is FlashLoanReceiverBase {
     // uint256 amount = 10 * 1e18;
     // uint16 referral = 0;
 
-    constructor() public {
-       
-        admin = msg.sender;
-        address _provider = getLendingAddress();
+    constructor() FlashLoanReceiverBase(_provider) public {
+        _provider = getLendingAddress();
         LendingPool lendingPool = LendingPool(_provider);
+        admin = msg.sender;
+        
 
     }
 
@@ -126,7 +127,7 @@ contract Wallets is FlashLoanReceiverBase {
 
     function depositToAave(address dai, uint256 amount, address to) public {
         IERC20 underlying = IERC20(dai);
-        // address _provider = getLendingAddress();
+         //address _provider = getLendingAddress();
         // LendingPool lendingPool = LendingPool(_provider);
         underlying.approve(_provider, amount);
         lendingPool.deposit(address(dai), amount, to, 0);
@@ -134,7 +135,7 @@ contract Wallets is FlashLoanReceiverBase {
     }
 
     function borrowFromAave(uint256 amount) public {
-        //address _provider = getLendingAddress();
+       // address _provider = getLendingAddress();
         address underlyingAsset = 0x6B175474E89094C44Da98b954EedeAC495271d0F;
         //LendingPool lendingPool = LendingPool(_provider);
         lendingPool.borrow(underlyingAsset, amount, 2, 0, address(this));
@@ -142,19 +143,22 @@ contract Wallets is FlashLoanReceiverBase {
     }
 
     function startFlashLoan(address[] calldata assets, uint256[] calldata amounts) public {
+       // address _provider = getLendingAddress();
+       //  LendingPool lendingPool = LendingPool(_provider);
+
         address receiverAddress = address(this);
 
-        uint256[] memory modes = new uint256[];
+        uint256[] memory modes = new uint256[](1);
         modes[0] = 0;
 
         address onBehalfOf = address(this);
 
         bytes memory params = "";
 
-        lendingPool.flashLoan(assets, amounts, modes, onBehalfOf, params, 0);
+        lendingPool.flashLoan(address(this), assets, amounts, modes, onBehalfOf, params, 0);
     }
 
-    function executeOperation(address[] calldata assets, uint256[] calldata amounts, uint256[] calldata premiums, address initiator, bytes calldata params) external returns (bool) {
+    function executeOperation(address[] calldata assets, uint256[] calldata amounts, uint256[] calldata premiums, address initiator, bytes calldata params) external override returns (bool) {
 
 
 
@@ -169,7 +173,7 @@ contract Wallets is FlashLoanReceiverBase {
         return true;
     }
 
-    function() external payable {}
+    //function() external payable {}
 
     
 

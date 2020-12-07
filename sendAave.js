@@ -16,7 +16,7 @@ const web3 = new Web3('http://127.0.0.1:8545');
 
 // Set up a wallet using one of Ganache's key pairs.
 // Don't use this key outside of your local test environment.
-const privateKey = '0x0df0e82361712ff1bc1757f57dc1f3e2e913759f1842cca4d1aa8a2e3f860a56';
+const privateKey = '0x81df2d1044560fa4ab5e6c0c7ade77201f6e636749c11895ec275c63701e6dc6';
 
 // Add your Ethereum wallet to the Web3 object
 web3.eth.accounts.wallet.add(privateKey);
