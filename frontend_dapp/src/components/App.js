@@ -117,7 +117,7 @@ const App = () => {
     console.log(`Now transferring ${assetName} from my wallet to MyContract...`);
 
     let transferResult = await daiContract.methods.transfer(contractAddress, web3.utils.toHex(amount * Math.pow(10, 18))).send(fromMyWallet)
-    
+      
     console.log(`MyContract now has ${assetName} to supply to the Compound Protocol.`);
   }
 

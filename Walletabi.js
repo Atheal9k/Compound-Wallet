@@ -25,6 +25,23 @@ module.exports = [
     "type": "fallback"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "s",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "name": "MyLog",
+    "type": "event"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -60,34 +77,6 @@ module.exports = [
     "constant": true,
     "inputs": [],
     "name": "balance",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "num",
-        "type": "uint256"
-      }
-    ],
-    "name": "setTest",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getTest",
     "outputs": [
       {
         "name": "",
@@ -148,6 +137,56 @@ module.exports = [
         "type": "bool"
       }
     ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getLendingAddress",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "dai",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "to",
+        "type": "address"
+      }
+    ],
+    "name": "depositToAave",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "borrowFromAave",
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
