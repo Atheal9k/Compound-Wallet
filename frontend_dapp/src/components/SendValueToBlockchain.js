@@ -1,8 +1,12 @@
-import {useState} from 'react';
-import compound from './compound';
+import {useState, useContext} from 'react';
+import ConnectWallet from './ConnectWallet'
+import {ConnectedContext} from './App'
 
 const SendValueToBlockchain = ({deposits}) => {
     const [amount, setAmount] = useState('');
+
+    const {isConnected, setIsConnected} = useContext(ConnectedContext)
+    console.log(isConnected)
 
     const updateValue = (event) => {
         event.preventDefault();
@@ -20,7 +24,7 @@ const SendValueToBlockchain = ({deposits}) => {
         <div>
             <form onSubmit={submitValue} className="form-submit">
                 <input type="text" placeholder="Enter Amount" value={amount} onChange={updateValue} className="input-send"/>
-                <button className="btn-send">Send</button>
+                {isConnected === 'disconnected' ? <ConnectWallet /> : <button className="btn-send">Send</button>}
             </form>
         </div>
     )
